@@ -2,10 +2,16 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import productModel from "./models/products.js";
+import dotenv from "dotenv";
+/*------------------------------------------------------------------------------------------------*/
+
+dotenv.config();
+const mongo_uri = process.env.MONGO_URI;
+const port = process.env.PORT;
 
 await mongoose
   .connect(
-    "mongodb+srv://savvyreactor:nhom2mindx@project-ss3.enwnglq.mongodb.net/project_ss3?retryWrites=true&w=majority&appName=project-ss3"
+    mongo_uri,
   )
   .then(() => {
     console.log("Connected to MongoDB");
@@ -28,6 +34,6 @@ app.get("/products", async (req, res) => {
   res.send(products);
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(port, () => {
+  console.log("Server is running on port", port);
 });
