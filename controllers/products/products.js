@@ -6,6 +6,10 @@ const productsController = {
     console.log('getProducts');
     res.send(products);
   },
+  getProductById: async (req, res) => {
+    const product = await productModel.findById(req.params.id);
+    res.send(product);
+  }
 };
 
 export default productsController;
