@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phone_number: {
+    type: String,
+    required: true,
+  },
   salt: {
     type: String,
     required: true,
