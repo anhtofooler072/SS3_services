@@ -16,7 +16,7 @@ const userCredController = {
         salt,
       });
       await user.save();
-      res.send("User registered successfully");
+      res.send(user)
     } catch (error) {
       res.status(500).send(error.message);
     }
