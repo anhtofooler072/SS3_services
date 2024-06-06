@@ -16,12 +16,17 @@ const userCredController = {
         salt,
       });
       await user.save();
-      res.send(user)
+      res.send("Đăng ký thành công");
     } catch (error) {
       res.status(500).send(error.message);
     }
   },
 
+  /* 
+    @param {email, password} 
+    @returns {token}
+    todo - save the token in the local storage then use it to access the protected routes
+  */
   tokenize: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -37,6 +42,26 @@ const userCredController = {
       res.status(200).send(token);
     } catch (error) {
       res.status;
+    }
+  },
+
+  /*
+    @param {email}
+    @returns {username, email, phone_number}
+  */
+  getUser: async (req, res) => {
+    try {
+      const { email } = req.UserCredInfo;
+      const UserInfo = await userModel.findOne({ email: email });
+      const UserInfoFiltered = {
+        username: UserInfo.username,
+        email: UserInfo.email,
+        phone_number: UserInfo.phone_number,
+      };
+      res.status(200).send(UserInfoFiltered);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error.message);
     }
   },
 };
