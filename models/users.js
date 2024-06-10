@@ -11,11 +11,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  password: {
+  phone_number: {
     type: String,
     required: true,
   },
-  phone_number: {
+  address: {
+    type: String,
+    default: "N/A"
+  },
+  password: {
     type: String,
     required: true,
   },
