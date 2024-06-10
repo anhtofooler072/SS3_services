@@ -54,6 +54,7 @@ const userCredController = {
       const { email } = req.UserCredInfo;
       const UserInfo = await userModel.findOne({ email: email });
       const UserInfoFiltered = {
+        userId: UserInfo._id,
         username: UserInfo.username,
         email: UserInfo.email,
         phone_number: UserInfo.phone_number,
