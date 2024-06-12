@@ -7,5 +7,6 @@ const universalRouter = Router();
 universalRouter.get("/fetchproducts", productsController.getProducts);
 universalRouter.get("/fetchproducts/:id", productsController.getProductById);
 universalRouter.post("/ordering", orderingController.checkout);
+universalRouter.get("/finding", productsController.findProduct)
 
 export default universalRouter;
