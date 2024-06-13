@@ -20,6 +20,19 @@ const orderingController = {
       res.status(500).send(error);
     }
   },
+
+  getOrdersHistory: async (req, res) => { 
+    try {
+      const {email} = req.UserCredInfo;
+      const orders = await orderModel.find({email});
+      res.send(orders);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .send("An error occurred while trying to get the orders history");
+    }
+  }
 };
 
 export default orderingController;
