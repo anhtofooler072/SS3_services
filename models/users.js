@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  favourites: {
+    type: Array,
+    default: [],
+  },
 });
 
 const userModel = mongoose.model("Users", userSchema);
