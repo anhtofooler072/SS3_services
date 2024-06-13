@@ -38,7 +38,12 @@ const userCredController = {
       if (hashedPassword !== loginInfo.password) {
         return res.status(400).send("Mật khẩu không đúng");
       }
-      const token = jwt.sign({ email }, process.env.TOKEN_SECRET);
+      
+      const payload = {
+        email,
+        _id: loginInfo._id,
+      };
+      const token = jwt.sign(payload, process.env.TOKEN_SECRET);
       res.status(200).send(token);
     } catch (error) {
       res.status;
