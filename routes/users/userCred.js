@@ -18,4 +18,6 @@ credRouter.post("/tokenize", userCredController.tokenize);
 // second step
 credRouter.get("/getUser", auth.verifyToken, userCredController.getUser);
 
+// refresh token
+credRouter.get("/refreshToken", userCredController.refreshToken);
 export default credRouter;

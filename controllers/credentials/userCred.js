@@ -38,18 +38,38 @@ const userCredController = {
       if (hashedPassword !== loginInfo.password) {
         return res.status(400).send("Mật khẩu không đúng");
       }
-      
+
       const payload = {
         email,
         _id: loginInfo._id,
       };
-      const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+      const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "17s" });
+      const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" });
+      const token = {
+        accessToken,
+        refreshToken,
+      };
       res.status(200).send(token);
     } catch (error) {
       res.status;
     }
   },
 
+  refreshToken: async (req, res) => {
+    try {
+      const token = req.header("Authorization").split(" ")[1];
+      if (!token) return res.status(401).send("Access Denied");
+      const verified = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+      const payload = {
+        email: verified.email,
+        _id: verified._id,
+      };
+      const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "17s" });
+      res.status(200).send(accessToken);
+    } catch (error) {
+      res.status(400).send("Invalid Token");
+    }
+  },
   /*
     @param {email}
     @returns {username, email, phone_number}
