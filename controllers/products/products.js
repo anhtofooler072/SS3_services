@@ -27,7 +27,8 @@ const productsController = {
 
   addFavourites: async (req, res) => {
     try {
-      const { userId, productId } = req.body;
+      const userId = req.UserCredInfo._id;
+      const { productId } = req.body;
       const user = await userModel.findById(userId);
       if (!user) {
         return res.status(400).send("User not found");
@@ -41,7 +42,7 @@ const productsController = {
       }
       user.favourites.push(productId);
       await user.save();
-      res.send(user);
+      res.send(user.favourites);
     } catch (error) {
       console.log(error);
     }
