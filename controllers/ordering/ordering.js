@@ -3,7 +3,8 @@ import orderModel from "../../models/orders.js";
 const orderingController = {
   checkout: async (req, res) => {
     try {
-      const { userId, name, email, address, phone, items, timeStamp } = req.body;
+      const { name, email, address, phone, items, timeStamp } = req.body;
+      const { _id: userId } = req.UserCredInfo;
       const newOrder = new orderModel({
         userId,
         name,
