@@ -43,7 +43,7 @@ const userCredController = {
         email,
         _id: loginInfo._id,
       };
-      const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "17s" });
+      const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "50s" });
       const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "1d" });
       const token = {
         accessToken,
@@ -64,7 +64,7 @@ const userCredController = {
         email: verified.email,
         _id: verified._id,
       };
-      const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "17s" });
+      const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: "50s" });
       res.status(200).send(accessToken);
     } catch (error) {
       res.status(400).send("Invalid Token");
