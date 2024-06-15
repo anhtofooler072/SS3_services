@@ -7,10 +7,10 @@ const auth = {
       if (!token) return res.status(401).send("Access Denied");
       const verified = jwt.verify(token, process.env.TOKEN_SECRET);
       req.UserCredInfo = verified;
-      // console.log(verified); // testing purpose 
+      console.log(verified); // testing purpose 
       next();
     } catch (error) {
-      res.status(400).send("Invalid Token");
+      res.status(400).send(error.message);
     }
   },
 };
